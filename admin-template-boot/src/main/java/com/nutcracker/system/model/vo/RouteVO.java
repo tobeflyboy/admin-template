@@ -24,7 +24,7 @@ public class RouteVO {
     @Schema(description = "组件路径", example = "system/user/index")
     private String component;
 
-    @Schema(description = "跳转链接", example = "https://www.youlai.tech")
+    @Schema(description = "跳转链接", example = "https://github.com/tobeflyboy/admin-template")
     private String redirect;
 
     @Schema(description = "路由名称")

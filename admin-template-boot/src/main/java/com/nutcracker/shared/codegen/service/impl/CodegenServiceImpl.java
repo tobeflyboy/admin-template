@@ -122,7 +122,7 @@ public class CodegenServiceImpl implements CodegenService {
             String moduleName = genConfig.getModuleName();
             // 子包名：controller
             String subpackageName = templateConfig.getSubpackageName();
-            // 组合成文件路径：src/main/java/com/youlai/boot/system/controller
+            // 组合成文件路径：src/main/java/com/nutcracker/boot/system/controller
             String filePath = getFilePath(templateName, moduleName, packageName, subpackageName, entityName);
             previewVO.setPath(filePath);
 
@@ -162,10 +162,10 @@ public class CodegenServiceImpl implements CodegenService {
      *
      * @param templateName   模板名 Entity
      * @param moduleName     模块名 system
-     * @param packageName    包名 com.youlai
+     * @param packageName    包名 com.nutcracker
      * @param subPackageName 子包名 controller
      * @param entityName     实体类名 UserController
-     * @return 文件路径 src/main/java/com/youlai/system/controller
+     * @return 文件路径 src/main/java/com/nutcracker/system/controller
      */
     private String getFilePath(String templateName, String moduleName, String packageName, String subPackageName, String entityName) {
         String path;

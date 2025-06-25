@@ -29,13 +29,13 @@ public class GenConfigForm {
     @Schema(description = "模块名", example = "system")
     private String moduleName;
 
-    @Schema(description = "包名", example = "com.youlai")
+    @Schema(description = "包名", example = "com.nutcracker")
     private String packageName;
 
     @Schema(description = "实体名", example = "User")
     private String entityName;
 
-    @Schema(description = "作者", example = "youlaitech")
+    @Schema(description = "作者", example = "胡桃夹子")
     private String author;
 
     @Schema(description = "上级菜单ID", example = "1")
