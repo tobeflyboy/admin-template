@@ -5,7 +5,8 @@ networks:
 
 services:
   mysql:
-    image: mysql:8.0.29
+#    image: mysql:8.0.29
+    image: m.daocloud.io/docker.io/library/mysql:8.0.29
     container_name: mysql
     restart: unless-stopped # 重启策略：除非手动停止容器，否则自动重启
     environment:
@@ -22,7 +23,8 @@ services:
       - develop # 加入 "develop" 网络
 
   redis:
-    image: redis:7.2.3
+#    image: redis:7.2.3
+    image: m.daocloud.io/docker.io/library/redis:7.2.3
     container_name: redis
     restart: unless-stopped
     command: redis-server /etc/redis/redis.conf --requirepass 123456 --appendonly no # 启动 Redis 服务并添加密码为：123456，默认不开启 Redis AOF 方式持久化配置
@@ -37,7 +39,8 @@ services:
       - develop
 
   minio:
-    image: minio/minio:latest
+#    image: minio/minio:latest
+    image: m.daocloud.io/docker.io/minio/minio:latest
     container_name: minio
     restart: unless-stopped
     command: server /data --console-address ":9001"
@@ -56,7 +59,8 @@ services:
       - develop
 
   xxl-job-admin:
-    image: xuxueli/xxl-job-admin:2.4.0
+#    image: xuxueli/xxl-job-admin:2.4.0
+    image: m.daocloud.io/docker.io/xuxueli/xxl-job-admin:2.4.0
     container_name: xxl-job-admin
     restart: unless-stopped
     environment:

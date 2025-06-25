@@ -1,35 +1,7 @@
 <div align="center">
   <img alt="admin-template-web" width="80" height="80" src="./src/assets/logo.png">
   <h1>admin-template-web</h1>
-
-  <img src="https://img.shields.io/badge/Vue-3.5.16-brightgreen.svg"/>
-  <img src="https://img.shields.io/badge/Vite-6.3.5-green.svg"/>
-  <img src="https://img.shields.io/badge/Element Plus-2.9.11-blue.svg"/>
-  <img src="https://img.shields.io/badge/license-MIT-green.svg"/>
-  <a href="https://gitee.com/youlaiorg" target="_blank">
-      <img src="https://img.shields.io/badge/Author-有来开源组织-orange.svg"/>
-  </a>
-
-  <a href="https://gitee.com/youlaiorg/admin-template-web" target="_blank">
-    <img alt="有来技术" src="https://gitee.com/youlaiorg/admin-template-web/badge/star.svg"/>
-   </a>
-  <a href="https://github.com/youlaitech/admin-template-web" target="_blank">
-    <img alt="有来技术" src="https://img.shields.io/github/stars/youlaitech/admin-template-web.svg?style=social&label=Stars"/>
-  </a>
-  <a href="https://gitcode.com/youlai/vue3-element-admin" target="_blank">
-    <img alt="有来技术" src="https://gitcode.com/youlai/vue3-element-admin/star/badge.svg"/>
-  </a>
-
 </div>
-
-![](https://foruda.gitee.com/images/1708618984641188532/a7cca095_716974.png "rainbow.png")
-
-
-<div align="center">
-  <a target="_blank" href="https://vue.youlai.tech">🖥️ 在线预览</a> | <a target="_blank" href="https://app.youlai.tech">📲 移动端预览</a> |  <a target="_blank" href="https://juejin.cn/post/7228990409909108793">📑 阅读文档</a>|  <a target="_blank" href="https://www.youlai.tech//admin-template-web">🌐 官网</a> | <a href="./README.en-US.md">💬 English
-</div>
-
-
 ## 项目简介
 
 [admin-template-web](https://gitcode.com/youlai/vue3-element-admin) 基于 Vue3、Vite、TypeScript 和 Element-Plus 搭建的极简开箱即用企业级后台管理前端模板。 配套 Java 后端 [youlai-boot](https://gitee.com/youlaiorg/youlai-boot) 和 Node 后端 [youlai-nest](https://gitee.com/youlaiorg/youlai-nest) 。 提供开发简版[vue3-element-template](https://gitee.com/youlaiorg/vue3-element-template) 和 JS 版本[admin-template-web-js](https://gitee.com/youlaiorg/admin-template-web) 供开发者快速开发。
