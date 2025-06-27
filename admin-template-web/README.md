@@ -3,8 +3,9 @@
   <h1>admin-template-web</h1>
 </div>
 ## 项目简介
+本工程基于[vue3-element-admin](https://gitcode.com/youlai/vue3-element-admin)改造而来
 
-[admin-template-web](https://gitcode.com/youlai/vue3-element-admin) 基于 Vue3、Vite、TypeScript 和 Element-Plus 搭建的极简开箱即用企业级后台管理前端模板。 配套 Java 后端 [youlai-boot](https://gitee.com/youlaiorg/youlai-boot) 和 Node 后端 [youlai-nest](https://gitee.com/youlaiorg/youlai-nest) 。 提供开发简版[vue3-element-template](https://gitee.com/youlaiorg/vue3-element-template) 和 JS 版本[admin-template-web-js](https://gitee.com/youlaiorg/admin-template-web) 供开发者快速开发。
+[admin-template-web](https://github.com/tobeflyboy/admin-template/tree/main/admin-template-web) 基于 Vue3、Vite、TypeScript 和 Element-Plus 搭建的极简开箱即用企业级后台管理前端模板。 配套 Java 后端 [admin-template-boot](https://github.com/tobeflyboy/admin-template/tree/main/admin-template-boot) 快速开发。
 
 
 ## 项目特色
@@ -33,32 +34,6 @@
 
 ![](https://www.youlai.tech/storage/blog/2025/04/30/app.jpg)
 
-## 项目源码
-
-| 项目 | Gitee   | Github    | GitCode|
-| ---- | ----| ---- | ---- |
-| admin-template-web ✅| [admin-template-web](https://gitee.com/youlaiorg/admin-template-web) | [admin-template-web](https://github.com/youlaitech/admin-template-web) | [admin-template-web](https://gitcode.com/youlai/vue3-element-admin) |
-| admin-template-web JS版| [admin-template-web-js](https://gitee.com/youlaiorg/admin-template-web-js) | [admin-template-web-js](https://github.com/youlaitech/admin-template-web-js) | [admin-template-web-js](https://gitcode.com/youlai/vue3-element-admin-js) |
-| admin-template-web 精简版 | [vue3-element-template](https://gitee.com/youlaiorg/vue3-element-template) | [vue3-element-template](https://github.com/youlaitech/vue3-element-template) |[vue3-element-template](https://gitcode.com/youlai/vue3-element-template)|
-| vue-uniapp-admin 移动版 | [vue-uniapp-admin](https://gitee.com/youlaiorg/vue-uniapp-admin) | [vue-uniapp-admin](https://github.com/youlaitech/vue-uniapp-admin) |[vue-uniapp-admin](https://gitcode.com/youlai/vue-uniapp-admin)|
-| Java 后端 | [youlai-boot](https://gitee.com/youlaiorg/youlai-boot)       | [youlai-boot](https://github.com/haoxianrui/youlai-boot.git) |[youlai-boot](https://gitcode.com/youlai/youlai-boot.git)|
-| Node 后端 | [youlai-nest](https://gitee.com/youlaiorg/youlai-nest)       | [youlai-nest](https://github.com/haoxianrui/youlai-nest.git) |[youlai-nest](https://gitcode.com/youlai/youlai-nest.git)|
-
-
-
-## 开发指南
-
-| 名称          | 地址     |
-|---------------|--------------------|
-| 视频教程 | [https://www.bilibili.com/video/BV1eFUuYyEFj](https://www.bilibili.com/video/BV1eFUuYyEFj)  |
-| 项目搭建  | [基于 Vue3 + Vite + TypeScript + Element-Plus 从0到1搭建后台管理系统](https://blog.csdn.net/u013737132/article/details/130191394)  |
-| 官方文档 | [https://www.youlai.tech/admin-template-web/](https://www.youlai.tech/admin-template-web/)  |
-| 代码规范     | [ESLint V9 + Prettier + Stylelint + EditorConfig 约束和统一前端代码规范](https://youlai.blog.csdn.net/article/details/145608723) |
-| 提交规范 | [Husky + Lint-staged + Commitlint + Commitizen + cz-git 配置 Git 提交规范](https://youlai.blog.csdn.net/article/details/145615236) |
-| 接口文档 | [https://www.apifox.cn/apidoc/shared-195e783f-4d85-4235-a038-eec696de4ea5](https://www.apifox.cn/apidoc/shared-195e783f-4d85-4235-a038-eec696de4ea5) |
-
-
-
 ## 项目启动
 
 
@@ -66,7 +41,6 @@
 
 | 环境类型       | 名称                     |
 |----------------|-----------------------------|
-| **开发工具**   | [Visual Studio Code](https://code.visualstudio.com/Download) |
 | **运行环境**   | Node 18 + (推荐[22.9.0](https://npmmirror.com/mirrors/node/v22.9.0/))  |
 > ⚠️ 注意：Node.js 20.6.0版本存在兼容性问题，请勿使用
 
@@ -75,10 +49,10 @@
 
 ```bash
 # 克隆代码
-git clone https://gitee.com/youlaiorg/admin-template-web.git
+git clone git@github.com:tobeflyboy/admin-template.git
 
 # 切换目录
-cd admin-template-web
+cd admin-template/admin-template-web
 
 # 安装 pnpm
 npm install pnpm -g
@@ -116,13 +90,13 @@ server {
 
     # 反向代理配置
     location /prod-api/ {
-        # 请将 api.youlai.tech 替换为您的后端 API 地址，并注意保留后面的斜杠 /
-        proxy_pass http://api.youlai.tech/;
+        # 请将 api.nutcracker.com 替换为您的后端 API 地址，并注意保留后面的斜杠 /
+        proxy_pass http://api.nutcracker.com/;
     }
 }
 ```
 
-更多详细信息，请参考这篇文章：[Nginx 安装和配置](https://blog.csdn.net/u013737132/article/details/145667694)。
+更多详细信息，请参考这篇文章：[Docker安装Nginx](https://blog.csdn.net/wangxin_wangxin/article/details/148948096) 
 
 ## 本地Mock
 
@@ -132,9 +106,9 @@ server {
 
 > 如果您具备Java开发基础，按照以下步骤将在线接口转为本地后端接口，创建企业级前后端分离开发环境，助您走向全栈之路。
 
-1. 获取基于 `Java` 和 `SpringBoot` 开发的后端 [youlai-boot](https://gitee.com/youlaiorg/youlai-boot.git) 源码。
-2. 根据后端工程的说明文档 [README.md](https://gitee.com/youlaiorg/youlai-boot#%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C) 完成本地启动。
-3. 修改 `.env.development` 文件中的 `VITE_APP_API_URL` 的值，将其从 https://api.youlai.tech 更改为 http://localhost:8989 即可。
+1. 获取基于 `Java` 和 `SpringBoot` 开发的后端 [admin-template-boot](https://github.com/tobeflyboy/admin-template/tree/main/admin-template-boot) 源码。
+2. 根据后端工程的说明文档 [README.md](https://github.com/tobeflyboy/admin-template/tree/main/admin-template-boot#%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C) 完成本地启动。
+3. 修改 `.env.development` 文件中的 `VITE_APP_API_URL` 的值，将其从 https://api.youlai.tech 更改为 http://localhost:8080 即可。
 
 
 ## 注意事项
@@ -157,37 +131,9 @@ server {
 
 	重启 VSCode 尝试
 
-- **其他问题**
-
-  如果有其他问题或者建议，建议 [ISSUE](https://gitee.com/youlaiorg/admin-template-web/issues/new)
-
 
 ## 提交规范
 
 执行 `pnpm run commit` 唤起 git commit 交互，根据提示完成信息的输入和选择。
 
 ![](https://foruda.gitee.com/images/1687755823165218215/c1705416_716974.png)
-
-
-## 项目统计
-
-![](https://repobeats.axiom.co/api/embed/aa7cca3d6fa9c308fc659fa6e09af9a1910506c3.svg "Repobeats analytics image")
-
-
-Thanks to all the contributors!
-
-[![contributors](https://contrib.rocks/image?repo=youlaitech/admin-template-web)](https://github.com/youlaitech/admin-template-web/graphs/contributors)
-
-
-## 特别感谢
-
-- 感谢 [GitCode](https://gitcode.com/) 官方的 [G-Star](https://gitcode.com/g-star) 认证
-  ![](https://foruda.gitee.com/images/1728577513089814203/95f2a70d_716974.jpeg)
-
-## 加群交流
-
-① 关注「有来技术」公众号，点击菜单 **交流群** 获取加群二维码（此举防止广告进群，感谢理解和支持）。
-
-② 直接添加微信 **`haoxianrui`** 备注「前端/后端/全栈」。
-
-![有来技术公众号](https://foruda.gitee.com/images/1737108820762592766/3390ed0d_716974.png)

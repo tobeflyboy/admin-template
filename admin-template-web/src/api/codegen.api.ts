@@ -47,8 +47,7 @@ const GeneratorAPI = {
 
   /**
    * 下载 ZIP 文件
-   * @param url
-   * @param fileName
+   * @param tableName 表名称
    */
   download(tableName: string) {
     return request({

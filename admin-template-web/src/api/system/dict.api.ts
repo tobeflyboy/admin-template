@@ -91,6 +91,7 @@ const DictAPI = {
   /**
    * 获取字典分页列表
    *
+   * @param dictCode 字典编码
    * @param queryParams 查询参数
    * @returns 字典分页结果
    */
@@ -126,6 +127,7 @@ const DictAPI = {
   /**
    * 获取字典项表单数据
    *
+   * @param dictCode 字典编码
    * @param id 字典项ID
    * @returns 字典项表单数据
    */
@@ -306,5 +308,6 @@ export interface DictItemOption {
   value: number | string;
   label: string;
   tagType?: "" | "success" | "info" | "warning" | "danger";
+
   [key: string]: any;
 }

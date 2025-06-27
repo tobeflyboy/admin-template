@@ -41,7 +41,7 @@ const ConfigAPI = {
   /**
    * 删除系统配置
    *
-   * @param ids 系统配置ID
+   * @param id id
    */
   deleteById(id: string) {
     return request({

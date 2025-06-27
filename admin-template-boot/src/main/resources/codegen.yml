@@ -2,7 +2,7 @@
 # 代码生成器配置
 codegen:
   # 下载代码文件名称
-  downloadFileName: youlai-admin-code.zip
+  downloadFileName: admin-template-boot-code.zip
   # 后端项目名称
   backendAppName: admin-template-boot
   # 前端项目名称

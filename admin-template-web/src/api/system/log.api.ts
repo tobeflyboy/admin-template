@@ -33,7 +33,6 @@ const LogAPI = {
   /**
    * 获取访问统计
    *
-   * @param queryParams
    * @returns
    */
   getVisitStats() {
