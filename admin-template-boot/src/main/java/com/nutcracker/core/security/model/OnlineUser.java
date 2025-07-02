@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -15,7 +17,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OnlineUser {
+public class OnlineUser implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1034703284948943317L;
 
     /**
      * 用户ID

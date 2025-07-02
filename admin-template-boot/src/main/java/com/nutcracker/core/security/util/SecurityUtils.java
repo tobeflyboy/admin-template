@@ -1,11 +1,12 @@
 package com.nutcracker.core.security.util;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import com.nutcracker.common.constant.SecurityConstants;
 import com.nutcracker.common.constant.SystemConstants;
 import com.nutcracker.core.security.model.SysUserDetails;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,9 +15,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 /**
  * Spring Security 工具类
@@ -24,6 +27,7 @@ import java.util.stream.Collectors;
  * @author 胡桃夹子
  * @since 2021/1/10
  */
+@Slf4j
 public class SecurityUtils {
 
     /**
@@ -81,23 +85,51 @@ public class SecurityUtils {
         return getUser().map(SysUserDetails::getDataScope).orElse(null);
     }
 
-
     /**
-     * 获取角色集合
+     * 获取当前用户的角色集合（去除前缀 ROLE_ 后的结果）
      *
-     * @return 角色集合
+     * @return 角色名称的字符串集合（Set<String>）
      */
     public static Set<String> getRoles() {
-        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
-                .map(Authentication::getAuthorities)
-                .filter(CollectionUtil::isNotEmpty)
-                .stream()
-                .flatMap(Collection::stream)
-                .map(GrantedAuthority::getAuthority)
-                // 筛选角色,authorities 中的角色都是以 ROLE_ 开头
-                .filter(authority -> authority.startsWith(SecurityConstants.ROLE_PREFIX))
-                .map(authority -> StrUtil.removePrefix(authority, SecurityConstants.ROLE_PREFIX))
-                .collect(Collectors.toSet());
+        // 1. 获取当前用户的认证信息 Authentication 对象
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // 2. 判断认证信息是否为空
+        if (authentication == null) {
+            // 如果没有认证信息，返回一个空的 Set（避免返回 null）
+            return Collections.emptySet();
+        }
+
+        // 3. 获取认证信息中的权限集合（GrantedAuthority 是 Spring Security 中表示权限的对象）
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        // 4. 判断权限集合是否为空
+        if (authorities == null || authorities.isEmpty()) {
+            // 权限集合为空，返回空 Set
+            return Collections.emptySet();
+        }
+
+        // 5. 创建一个 HashSet 用于存储处理后的角色名称
+        Set<String> roles = new HashSet<>();
+
+        // 6. 遍历每一个权限对象
+        for (GrantedAuthority authority : authorities) {
+            // 获取权限名称（例如：ROLE_ADMIN）
+            String authorityStr = authority.getAuthority();
+
+            // 7. 判断权限名称不为空，并且是以 "ROLE_" 开头的角色权限
+            if (authorityStr != null && authorityStr.startsWith(SecurityConstants.ROLE_PREFIX)) {
+
+                // 8. 去除前缀 "ROLE_"，只保留角色名部分（如 ADMIN）
+                String role = authorityStr.substring(SecurityConstants.ROLE_PREFIX.length());
+
+                // 9. 将角色名添加到结果集合中
+                roles.add(role);
+            }
+        }
+        log.info("roles={}", JSONUtil.toJsonStr(roles));
+        // 10. 返回最终的角色集合
+        return roles;
     }
 
     /**

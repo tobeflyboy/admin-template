@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 public class SysUserDetails implements UserDetails {
+
+    @Serial
+    private static final long serialVersionUID = -8269269666652741082L;
 
     /**
      * 用户ID

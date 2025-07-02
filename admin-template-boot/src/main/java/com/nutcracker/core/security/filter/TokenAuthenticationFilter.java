@@ -44,8 +44,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         try {
-            if (StrUtil.isNotBlank(authorizationHeader)
-                    && authorizationHeader.startsWith(SecurityConstants.BEARER_TOKEN_PREFIX)) {
+            if (StrUtil.isNotBlank(authorizationHeader) && authorizationHeader.startsWith(SecurityConstants.BEARER_TOKEN_PREFIX)) {
 
                 // 剥离Bearer前缀获取原始令牌
                 String rawToken = authorizationHeader.substring(SecurityConstants.BEARER_TOKEN_PREFIX.length());

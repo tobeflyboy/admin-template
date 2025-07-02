@@ -87,11 +87,14 @@ public class JwtTokenManager implements TokenManager {
         JWT jwt = JWTUtil.parseToken(token);
         JSONObject payloads = jwt.getPayloads();
         SysUserDetails userDetails = new SysUserDetails();
-        userDetails.setUserId(payloads.getLong(JwtClaimConstants.USER_ID)); // 用户ID
-        userDetails.setDeptId(payloads.getLong(JwtClaimConstants.DEPT_ID)); // 部门ID
-        userDetails.setDataScope(payloads.getInt(JwtClaimConstants.DATA_SCOPE)); // 数据权限范围
-
-        userDetails.setUsername(payloads.getStr(JWTPayload.SUBJECT)); // 用户名
+        // 用户ID
+        userDetails.setUserId(payloads.getLong(JwtClaimConstants.USER_ID));
+        // 部门ID
+        userDetails.setDeptId(payloads.getLong(JwtClaimConstants.DEPT_ID));
+        // 数据权限范围
+        userDetails.setDataScope(payloads.getInt(JwtClaimConstants.DATA_SCOPE));
+        // 用户名
+        userDetails.setUsername(payloads.getStr(JWTPayload.SUBJECT));
         // 角色集合
         Set<SimpleGrantedAuthority> authorities = payloads.getJSONArray(JwtClaimConstants.AUTHORITIES)
                 .stream()
@@ -148,7 +151,7 @@ public class JwtTokenManager implements TokenManager {
                     }
                 }
                 // 判断是否在黑名单中，如果在，则返回 false 标识Token无效
-                if (Boolean.TRUE.equals(redisTemplate.hasKey(StrUtil.format(RedisConstants.Auth.BLACKLIST_TOKEN, jti)))) {
+                if (redisTemplate.hasKey(StrUtil.format(RedisConstants.Auth.BLACKLIST_TOKEN, jti))) {
                     return false;
                 }
             }

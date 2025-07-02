@@ -40,6 +40,7 @@ spring:
       # 缓存null值，防止缓存穿透
       cache-null-values: true
     caffeine:
+      # 初始缓存容量为 50，最大缓存条目数为 1000，缓存写入后过期时间为 600 秒（即 10 分钟）
       spec: initialCapacity=50,maximumSize=1000,expireAfterWrite=600s
   # 邮件配置
   mail:
