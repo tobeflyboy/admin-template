@@ -1,5 +1,6 @@
 package com.nutcracker.auth.controller;
 
+import cn.hutool.json.JSONUtil;
 import com.nutcracker.auth.model.CaptchaInfo;
 import com.nutcracker.auth.model.dto.WxMiniAppCodeLoginDTO;
 import com.nutcracker.auth.model.dto.WxMiniAppPhoneLoginDTO;
@@ -52,7 +53,9 @@ public class AuthController {
             @Parameter(description = "用户名", example = "admin") @RequestParam String username,
             @Parameter(description = "密码", example = "123456") @RequestParam String password
     ) {
+        log.info("login username={},password={}", username, password);
         AuthenticationToken authenticationToken = authService.login(username, password);
+        log.info("login authenticationToken={}", JSONUtil.toJsonStr(authenticationToken));
         return Result.success(authenticationToken);
     }
 

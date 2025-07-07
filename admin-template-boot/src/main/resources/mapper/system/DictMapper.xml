@@ -6,23 +6,23 @@
     <!-- 字典分页列表 -->
     <select id="getDictPage" resultType="com.nutcracker.system.model.vo.DictPageVO">
         SELECT
-            t1.id,
-            t1.name,
-            t1.dict_code,
-            t1.status
+        t1.id,
+        t1.name,
+        t1.dict_code,
+        t1.status
         FROM
-            sys_dict t1
+        sys_dict t1
         <where>
             t1.is_deleted = 0
             <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
                 AND (
-                    t1.name LIKE CONCAT('%',#{queryParams.keywords},'%')
-                    OR
-                    t1.dict_code LIKE CONCAT('%',#{queryParams.keywords},'%')
+                t1.name LIKE CONCAT('%',#{queryParams.keywords},'%')
+                OR
+                t1.dict_code LIKE CONCAT('%',#{queryParams.keywords},'%')
                 )
             </if>
         </where>
         ORDER BY
-            t1.create_time DESC
+        t1.create_time DESC
     </select>
 </mapper>

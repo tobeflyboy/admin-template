@@ -5,6 +5,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.nutcracker.auth.enums.CaptchaTypeEnum;
 import com.nutcracker.auth.model.CaptchaInfo;
 import com.nutcracker.auth.model.dto.WxMiniAppCodeLoginDTO;
@@ -73,8 +74,8 @@ public class AuthServiceImpl implements AuthService {
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         // 3. 认证成功后生成 JWT 令牌，并存入 Security 上下文，供登录日志 AOP 使用（已认证）
-        AuthenticationToken authenticationTokenResponse =
-                tokenManager.generateToken(authentication);
+        AuthenticationToken authenticationTokenResponse = tokenManager.generateToken(authentication);
+        log.info("authenticationTokenResponse={}", JSONUtil.toJsonStr(authenticationTokenResponse));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return authenticationTokenResponse;
     }

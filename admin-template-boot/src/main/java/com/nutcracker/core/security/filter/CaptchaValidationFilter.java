@@ -10,6 +10,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
@@ -25,6 +26,7 @@ import java.io.IOException;
  * @author 胡桃夹子
  * @since 2022/10/1
  */
+@Slf4j
 @SuppressWarnings("NullableProblems")
 public class CaptchaValidationFilter extends OncePerRequestFilter {
 
@@ -50,6 +52,7 @@ public class CaptchaValidationFilter extends OncePerRequestFilter {
         if (LOGIN_PATH_REQUEST_MATCHER.matches(request)) {
             // 请求中的验证码
             String captchaCode = request.getParameter(CAPTCHA_CODE_PARAM_NAME);
+            log.info("captchaCode={}", captchaCode);
             // TODO 兼容没有验证码的版本(线上请移除这个判断)
             if (StrUtil.isBlank(captchaCode)) {
                 chain.doFilter(request, response);
@@ -60,13 +63,18 @@ public class CaptchaValidationFilter extends OncePerRequestFilter {
             String cacheVerifyCode = (String) redisTemplate.opsForValue().get(
                     StrUtil.format(RedisConstants.Captcha.IMAGE_CODE, verifyCodeKey)
             );
+            log.info("verifyCodeKey={},cacheVerifyCode={}", verifyCodeKey, cacheVerifyCode);
             if (cacheVerifyCode == null) {
+                log.warn("用户验证码过期");
                 ResponseUtils.writeErrMsg(response, ResultCode.USER_VERIFICATION_CODE_EXPIRED);
             } else {
                 // 验证码比对
-                if (codeGenerator.verify(cacheVerifyCode, captchaCode)) {
+                boolean verify = codeGenerator.verify(cacheVerifyCode, captchaCode);
+                log.info("{}={} ({})", cacheVerifyCode, captchaCode, verify);
+                if (verify) {
                     chain.doFilter(request, response);
                 } else {
+                    log.warn("验证码错误");
                     ResponseUtils.writeErrMsg(response, ResultCode.USER_VERIFICATION_CODE_ERROR);
                 }
             }

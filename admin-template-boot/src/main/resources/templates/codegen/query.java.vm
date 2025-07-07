@@ -18,27 +18,27 @@ import java.math.BigDecimal;
  * @author ${author}
  * @since ${date}
  */
-@Schema(description ="$!{businessName}查询对象")
+@Schema(description = "$!{businessName}查询对象")
 @Getter
 @Setter
 public class ${entityName}Query extends BasePageQuery {
 
-#if($fieldConfigs)
-    #foreach($fieldConfig in ${fieldConfigs})
-        #if($fieldConfig.isShowInQuery)
-            #if("$!fieldConfig.fieldComment" != "")
-    @Schema(description = "${fieldConfig.fieldComment}")
-            #end
-            #if($fieldConfig.formType == "DATE" || $fieldConfig.formType == "DATE_TIME")
-                #if($fieldConfig.queryType == "BETWEEN")
-    private List<String> ${fieldConfig.fieldName};
-                #else
-    private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
+    #if($fieldConfigs)
+        #foreach($fieldConfig in ${fieldConfigs})
+            #if($fieldConfig.isShowInQuery)
+                #if("$!fieldConfig.fieldComment" != "")
+                @Schema(description = "${fieldConfig.fieldComment}")
                 #end
-            #else
-    private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
+                #if($fieldConfig.formType == "DATE" || $fieldConfig.formType == "DATE_TIME")
+                    #if($fieldConfig.queryType == "BETWEEN")
+                    private List<String> ${fieldConfig.fieldName};
+                    #else
+                        private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
+                    #end
+                #else
+                    private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
+                #end
             #end
-         #end
+        #end
     #end
-#end
 }

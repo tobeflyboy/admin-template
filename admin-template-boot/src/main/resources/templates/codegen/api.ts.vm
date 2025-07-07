@@ -43,7 +43,7 @@ const ${entityName}API = {
      * @param id ${businessName}ID
      * @param data ${businessName}表单数据
      */
-     update(id: number, data: ${entityName}Form) {
+    update(id: number, data: ${entityName}Form) {
         return request({
             url: `${${entityName.toUpperCase()}_BASE_URL}/${id}`,
             method: "put",
@@ -56,7 +56,7 @@ const ${entityName}API = {
      *
      * @param ids ${businessName}ID字符串，多个以英文逗号(,)分割
      */
-     deleteByIds(ids: string) {
+    deleteByIds(ids: string) {
         return request({
             url: `${${entityName.toUpperCase()}_BASE_URL}/${ids}`,
             method: "delete",
@@ -71,16 +71,16 @@ export interface ${entityName}PageQuery extends PageQuery {
     #foreach($fieldConfig in $fieldConfigs)
         #if($fieldConfig.isShowInQuery)
             #if("$!fieldConfig.fieldComment" != "")
-    /** ${fieldConfig.fieldComment} */
+            /** ${fieldConfig.fieldComment} */
             #end
             #if($fieldConfig.formType == "DATE" || $fieldConfig.formType == "DATE_TIME")
                 #if($fieldConfig.queryType == "BETWEEN")
-    ${fieldConfig.fieldName}?: [string, string];
+                    ${fieldConfig.fieldName}?: [string, string];
                 #else
-    ${fieldConfig.fieldName}?: ${fieldConfig.tsType};
+                        ${fieldConfig.fieldName}?: ${fieldConfig.tsType};
                 #end
             #else
-    ${fieldConfig.fieldName}?: ${fieldConfig.tsType};
+                    ${fieldConfig.fieldName}?: ${fieldConfig.tsType};
             #end
         #end
     #end
@@ -90,10 +90,10 @@ export interface ${entityName}PageQuery extends PageQuery {
 export interface ${entityName}Form {
     #foreach($fieldConfig in $fieldConfigs)
         #if($fieldConfig.isShowInForm)
-    #if("$!fieldConfig.fieldComment" != "")
-    /** ${fieldConfig.fieldComment} */
-    #end
-    ${fieldConfig.fieldName}?:  ${fieldConfig.tsType};
+            #if("$!fieldConfig.fieldComment" != "")
+            /** ${fieldConfig.fieldComment} */
+            #end
+            ${fieldConfig.fieldName}?:  ${fieldConfig.tsType};
         #end
     #end
 }
@@ -103,9 +103,9 @@ export interface ${entityName}PageVO {
     #foreach($fieldConfig in $fieldConfigs)
         #if($fieldConfig.isShowInList)
             #if("$!fieldConfig.fieldComment" != "")
-    /** ${fieldConfig.fieldComment} */
+            /** ${fieldConfig.fieldComment} */
             #end
-    ${fieldConfig.fieldName}?: ${fieldConfig.tsType};
+            ${fieldConfig.fieldName}?: ${fieldConfig.tsType};
         #end
     #end
 }

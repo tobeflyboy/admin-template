@@ -33,11 +33,11 @@ public class ${entityName}ServiceImpl extends ServiceImpl<${entityName}Mapper, $
     private final ${entityName}Converter ${lowerFirstEntityName}Converter;
 
     /**
-    * 获取${businessName}分页列表
-    *
-    * @param queryParams 查询参数
-    * @return {@link IPage<${entityName}VO>} $!{businessName}分页列表
-    */
+     * 获取${businessName}分页列表
+     *
+     * @param queryParams 查询参数
+     * @return {@link IPage<${entityName}VO>} $!{businessName}分页列表
+     */
     @Override
     public IPage<${entityName}VO> get${entityName}Page(${entityName}Query queryParams) {
         Page<${entityName}VO> pageVO = this.baseMapper.get${entityName}Page(
@@ -46,7 +46,7 @@ public class ${entityName}ServiceImpl extends ServiceImpl<${entityName}Mapper, $
         );
         return pageVO;
     }
-    
+
     /**
      * 获取${businessName}表单数据
      *
@@ -58,7 +58,7 @@ public class ${entityName}ServiceImpl extends ServiceImpl<${entityName}Mapper, $
         ${entityName} entity = this.getById(id);
         return ${lowerFirstEntityName}Converter.toForm(entity);
     }
-    
+
     /**
      * 新增${businessName}
      *
@@ -70,7 +70,7 @@ public class ${entityName}ServiceImpl extends ServiceImpl<${entityName}Mapper, $
         ${entityName} entity = ${lowerFirstEntityName}Converter.toEntity(formData);
         return this.save(entity);
     }
-    
+
     /**
      * 更新${businessName}
      *
@@ -79,11 +79,11 @@ public class ${entityName}ServiceImpl extends ServiceImpl<${entityName}Mapper, $
      * @return 是否修改成功
      */
     @Override
-    public boolean update${entityName}(Long id,${entityName}Form formData) {
+    public boolean update${entityName}(Long id, ${entityName}Form formData) {
         ${entityName} entity = ${lowerFirstEntityName}Converter.toEntity(formData);
         return this.updateById(entity);
     }
-    
+
     /**
      * 删除${businessName}
      *

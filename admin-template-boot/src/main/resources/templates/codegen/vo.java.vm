@@ -3,6 +3,7 @@ package ${packageName}.${moduleName}.model.vo;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,20 +22,20 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@Schema( description = "$!{businessName}视图对象")
+@Schema(description = "$!{businessName}视图对象")
 public class ${entityName}VO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-#if($fieldConfigs)
-    #foreach($fieldConfig in ${fieldConfigs})
-        #if($fieldConfig.isShowInList)
-            #if("$!fieldConfig.fieldComment" != "")
-    @Schema(description = "${fieldConfig.fieldComment}")
+    #if($fieldConfigs)
+        #foreach($fieldConfig in ${fieldConfigs})
+            #if($fieldConfig.isShowInList)
+                #if("$!fieldConfig.fieldComment" != "")
+                @Schema(description = "${fieldConfig.fieldComment}")
+                #end
+            private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
             #end
-    private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
         #end
     #end
-#end
 }

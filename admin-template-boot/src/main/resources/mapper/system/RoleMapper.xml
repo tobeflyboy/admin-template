@@ -7,9 +7,9 @@
     <!-- 获取最大范围的数据权限 -->
     <select id="getMaximumDataScope" resultType="java.lang.Integer">
         SELECT
-            min(data_scope)
+        min(data_scope)
         FROM
-            sys_role
+        sys_role
         <where>
             <choose>
                 <when test="roles!=null and roles.size>0">

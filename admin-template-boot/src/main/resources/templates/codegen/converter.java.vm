@@ -12,9 +12,9 @@ import ${packageName}.${moduleName}.model.form.${entityName}Form;
  * @since ${date}
  */
 @Mapper(componentModel = "spring")
-public interface ${entityName}Converter{
+public interface ${entityName}Converter {
 
-    ${entityName}Form toForm(${entityName} entity);
+        ${entityName}Form toForm(${entityName} entity);
 
     ${entityName} toEntity(${entityName}Form formData);
 }

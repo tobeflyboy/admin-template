@@ -2,10 +2,10 @@ package ${packageName}.${moduleName}.${subpackageName};
 
 import lombok.Getter;
 import lombok.Setter;
-#if(${hasLocalDateTime})
-#end
-#if(${hasBigDecimal})
-#end
+    #if(${hasLocalDateTime})
+    #end
+    #if(${hasBigDecimal})
+    #end
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
@@ -17,18 +17,21 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @Getter
 @Setter
 @TableName("${tableName}")
-public class ${entityName} extends BaseEntity {
+public class ${entityName} extends
 
-    private static final long serialVersionUID = 1L;
+        BaseEntity {
 
-#foreach($fieldConfig in ${fieldConfigs})
-    #if(!$fieldConfig.fieldName.equals("id") && !$fieldConfig.fieldName.equals("createTime") && !$fieldConfig.fieldName.equals("updateTime"))
-        #if("$!fieldConfig.fieldComment" != "")
-    /**
-     * ${fieldConfig.fieldComment}
-     */
-        #end
-    private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
-    #end
-#end
-}
+            private static final long serialVersionUID = 1L;
+
+            #foreach($fieldConfig in ${fieldConfigs})
+                #if(!$fieldConfig.fieldName.equals("id") && !$fieldConfig.fieldName.equals(
+                    "createTime") && !$fieldConfig.fieldName.equals("updateTime"))
+                    #if("$!fieldConfig.fieldComment" != "")
+                        /**
+                         * ${fieldConfig.fieldComment}
+                         */
+                    #end
+                    private ${fieldConfig.fieldType} ${fieldConfig.fieldName};
+                #end
+            #end
+        }

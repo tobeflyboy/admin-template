@@ -28,7 +28,7 @@ public interface ${entityName}Service extends IService<${entityName}> {
      * @param id $!{businessName}ID
      * @return ${businessName}表单数据
      */
-     ${entityName}Form get${entityName}FormData(Long id);
+        ${entityName}Form get${entityName}FormData(Long id);
 
     /**
      * 新增${businessName}

@@ -28,14 +28,14 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/${kebabCaseEntityName}")
 @RequiredArgsConstructor
-public class ${entityName}Controller  {
+public class ${entityName}Controller {
 
     private final ${entityName}Service ${lowerFirstEntityName}Service;
 
     @Operation(summary = "$!{businessName}分页列表")
     @GetMapping("/page")
     @PreAuthorize("@ss.hasPerm('${moduleName}:${kebabCaseEntityName}:query')")
-    public PageResult<${entityName}VO> get${entityName}Page(${entityName}Query queryParams ) {
+    public PageResult<${entityName}VO> get${entityName}Page(${entityName}Query queryParams) {
         IPage<${entityName}VO> result = ${lowerFirstEntityName}Service.get${entityName}Page(queryParams);
         return PageResult.success(result);
     }
@@ -43,7 +43,7 @@ public class ${entityName}Controller  {
     @Operation(summary = "新增${businessName}")
     @PostMapping
     @PreAuthorize("@ss.hasPerm('${moduleName}:${kebabCaseEntityName}:add')")
-    public Result<Void> save${entityName}(@RequestBody @Valid ${entityName}Form formData ) {
+    public Result<Void> save${entityName}(@RequestBody @Valid ${entityName}Form formData) {
         boolean result = ${lowerFirstEntityName}Service.save${entityName}(formData);
         return Result.judge(result);
     }
@@ -52,9 +52,9 @@ public class ${entityName}Controller  {
     @GetMapping("/{id}/form")
     @PreAuthorize("@ss.hasPerm('${moduleName}:${kebabCaseEntityName}:edit')")
     public Result<${entityName}Form> get${entityName}Form(
-        @Parameter(description = "$!{businessName}ID") @PathVariable Long id
+            @Parameter(description = "$!{businessName}ID") @PathVariable Long id
     ) {
-        ${entityName}Form formData = ${lowerFirstEntityName}Service.get${entityName}FormData(id);
+            ${entityName}Form formData = ${lowerFirstEntityName}Service.get${entityName}FormData(id);
         return Result.success(formData);
     }
 
@@ -73,7 +73,7 @@ public class ${entityName}Controller  {
     @DeleteMapping("/{ids}")
     @PreAuthorize("@ss.hasPerm('${moduleName}:${kebabCaseEntityName}:delete')")
     public Result<Void> delete${entityName}s(
-        @Parameter(description = "$!{businessName}ID，多个以英文逗号(,)分割") @PathVariable String ids
+            @Parameter(description = "$!{businessName}ID，多个以英文逗号(,)分割") @PathVariable String ids
     ) {
         boolean result = ${lowerFirstEntityName}Service.delete${entityName}s(ids);
         return Result.judge(result);

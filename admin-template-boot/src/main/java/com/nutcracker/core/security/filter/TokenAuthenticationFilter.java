@@ -1,6 +1,7 @@
 package com.nutcracker.core.security.filter;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.nutcracker.common.constant.SecurityConstants;
 import com.nutcracker.common.result.ResultCode;
 import com.nutcracker.common.util.ResponseUtils;
@@ -9,6 +10,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +24,7 @@ import java.io.IOException;
  * @author 胡桃夹子
  * @since 2025/3/6 16:50
  */
+@Slf4j
 @SuppressWarnings("NullableProblems")
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
@@ -40,24 +43,22 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-
+        log.debug("authorizationHeader={}", authorizationHeader);
         try {
             if (StrUtil.isNotBlank(authorizationHeader) && authorizationHeader.startsWith(SecurityConstants.BEARER_TOKEN_PREFIX)) {
-
                 // 剥离Bearer前缀获取原始令牌
                 String rawToken = authorizationHeader.substring(SecurityConstants.BEARER_TOKEN_PREFIX.length());
-
                 // 执行令牌有效性检查（包含密码学验签和过期时间验证）
                 boolean isValidToken = tokenManager.validateToken(rawToken);
+                log.debug("rawToken={},isValidToken={}", rawToken, isValidToken);
                 if (!isValidToken) {
                     ResponseUtils.writeErrMsg(response, ResultCode.ACCESS_TOKEN_INVALID);
                     return;
                 }
-
                 // 将令牌解析为 Spring Security 上下文认证对象
                 Authentication authentication = tokenManager.parseToken(rawToken);
+                log.debug("authentication={}", JSONUtil.toJsonStr(authentication));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception ex) {

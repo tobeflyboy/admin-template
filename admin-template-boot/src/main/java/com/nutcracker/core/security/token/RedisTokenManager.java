@@ -10,6 +10,7 @@ import com.nutcracker.config.property.SecurityProperties;
 import com.nutcracker.core.security.model.AuthenticationToken;
 import com.nutcracker.core.security.model.OnlineUser;
 import com.nutcracker.core.security.model.SysUserDetails;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
  * @author 胡桃夹子
  * @since 2024/11/15
  */
+@Slf4j
 @ConditionalOnProperty(value = "security.session.type", havingValue = "redis-token")
 @Service
 public class RedisTokenManager implements TokenManager {
@@ -112,7 +114,9 @@ public class RedisTokenManager implements TokenManager {
      */
     @Override
     public boolean validateToken(String token) {
-        return redisTemplate.hasKey(formatTokenKey(token));
+        String formatTokenKey = formatTokenKey(token);
+        log.info("formatTokenKey={}", formatTokenKey);
+        return redisTemplate.hasKey(formatTokenKey);
     }
 
     /**

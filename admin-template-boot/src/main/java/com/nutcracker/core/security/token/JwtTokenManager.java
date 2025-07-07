@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTPayload;
 import cn.hutool.jwt.JWTUtil;
@@ -16,6 +17,7 @@ import com.nutcracker.common.result.ResultCode;
 import com.nutcracker.config.property.SecurityProperties;
 import com.nutcracker.core.security.model.AuthenticationToken;
 import com.nutcracker.core.security.model.SysUserDetails;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,6 +41,7 @@ import java.util.stream.Collectors;
  * @author 胡桃夹子
  * @since 2024/11/15
  */
+@Slf4j
 @ConditionalOnProperty(value = "security.session.type", havingValue = "jwt")
 @Service
 public class JwtTokenManager implements TokenManager {
@@ -83,7 +86,7 @@ public class JwtTokenManager implements TokenManager {
      */
     @Override
     public Authentication parseToken(String token) {
-
+        log.debug("token={}", token);
         JWT jwt = JWTUtil.parseToken(token);
         JSONObject payloads = jwt.getPayloads();
         SysUserDetails userDetails = new SysUserDetails();
@@ -138,10 +141,11 @@ public class JwtTokenManager implements TokenManager {
             JWT jwt = JWTUtil.parseToken(token);
             // 检查 Token 是否有效(验签 + 是否过期)
             boolean isValid = jwt.setKey(secretKey).validate(0);
-
+            log.debug("isValid={}", isValid);
             if (isValid) {
                 // 检查 Token 是否已被加入黑名单(注销、修改密码等场景)
                 JSONObject payloads = jwt.getPayloads();
+                log.debug("payloads={}", JSONUtil.toJsonStr(payloads));
                 String jti = payloads.getStr(JWTPayload.JWT_ID);
                 if (validateRefreshToken) {
                     //刷新token需要校验token类别
